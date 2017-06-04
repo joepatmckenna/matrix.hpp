@@ -1,0 +1,21 @@
+[:,] -> slice(0,inf,1)
+[i,] -> slice(i,i+1,1)
+[i:,] -> slice(i,inf,1)
+[i::,] -> ""
+[-i:,] -> slice(-i,inf,1)
+[:j,] -> slice(0,j,1)
+[:j:,] -> ""
+[:-j,] -> slice(0,-j,1)
+[::k,] -> slice(0,inf,k)
+[::-k,] -> slice(0,inf,-k)
+[i:j,] -> slice(i,j,1)
+[i:j:,] -> ""
+[i::k,] -> slice(i,inf,k)
+[:j:k,] -> slice(0,j,k)
+[i:j:k,] -> slice(i,j,k)
+
+sed 's/\[\([^]]*:\),/[slice(X),/g' replace_test.txt
+ 
+sed 's/\[\([^:]*\),\([^:]*\)\]/[slice(\1,\1+1,1),slice(\2,\2+1,1)]/g' replace_test.txt
+
+sed 's/\[\(.*\):\(.*\):\(.*\),\(.*\):\(.*\):\(.*\)\]/[slice(\1,\2,\3),slice(\4,\5,\6)]/g' replace_test.txt
