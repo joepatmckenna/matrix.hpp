@@ -1,10 +1,5 @@
 import numpy as np
 
-# dimension
-n = 100
-
-# line coeffs
-c = np.random.random(n + 1)
 
 # line fcn
 # f(x) = c0 + c1*x1 + ... + cn*xn
@@ -12,20 +7,25 @@ def f(x):
     return c[0] + np.dot(c[1:], x)
 
 
-# num data pts
-m = 500
+# n: dimension
+for n in range(2, 100):
+    # line coeffs
+    c = np.random.random(n + 1)
+    np.savetxt('data/c_%i.txt' % (n, ), c)
 
-# independent vectors x
-x = np.array([np.random.random(n) for i in range(m)])
+    # num data pts
+    m = 10 * n
 
-# dependent values y, with noise
-y = np.array([f(xi) + np.random.random() for xi in x])
+    for dataset in range(10):
+        # independent vectors x
+        x = np.array([2 * (np.random.random(n) - .5) for i in range(m)])
 
-# zip x and y into array z
-z = np.empty([m, n + 1])
-for i in range(m):
-    z[i, :n] = x[i]
-    z[i, -1] = y[i]
+        # dependent values y, with noise
+        y = np.array([f(xi) + .2 * (np.random.random() - .5) for xi in x])
 
-# write to file
-np.savetxt('conj_grad_data.txt', z)
+        # zip x and y into array z
+        z = np.empty([m, n + 1])
+        for i in range(m):
+            z[i, :n] = x[i]
+            z[i, -1] = y[i]
+        np.savetxt('data/xy_%i_%i.txt' % (n, dataset), z)
