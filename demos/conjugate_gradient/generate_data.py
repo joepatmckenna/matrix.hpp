@@ -1,6 +1,5 @@
 import numpy as np
 
-
 # line fcn
 # f(x) = c0 + c1*x1 + ... + cn*xn
 def f(x):
@@ -8,7 +7,7 @@ def f(x):
 
 
 # n: dimension
-for n in range(2, 100):
+for n in range(1, 100):
     # line coeffs
     c = np.random.random(n + 1)
     np.savetxt('data/c_%i.txt' % (n, ), c)
