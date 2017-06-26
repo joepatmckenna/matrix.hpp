@@ -4,14 +4,14 @@ import matplotlib as mpl
 
 
 # line fcn
-# f(x) = c0 + c1*x1 + ... + cn*xn
+# f(x) = c0 + c1*x
 def f(x):
     return c[0] + c[1] * x
 
 
 z = np.loadtxt('data/xy_1_0.txt')
-x = z[:, :2]
-y = z[:, -1]
+x = z[:, 0]
+y = z[:, 1]
 
 times = np.loadtxt('data/times.txt')
 
